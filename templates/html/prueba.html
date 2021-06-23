@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{sitio_titulo} - {sitio_pagina_titulo}</title>
+	</head>
+	<body>
+		<a href="{sitio_url}"><h1>Lorem ipsum dolor sit amet</h1></a>
+		{include=relleno}
+		<p>{TIEMPO|d/m/Y}</p>
+		<p>{TIEMPO|H:i:s}</p>
+		<p>{TIEMPO|Y}</p>
+		<p>{tiempoformato|Y|2016-03-16}</p>
+		<p>{tiempoformato|d/m/Y|2016-03-16}</p>
+		<ul>
+			{bloque}
+			<li>{numero} - {dia} - {texto}</li>
+			{/bloque}
+		</ul>
+		{is_sesion}
+		<p><h2>Bienvenido @Usuario</h2></p>
+		{/is_sesion}
+		{not_sesion}
+		<p><h2>Bienvenido Visitante</h2></p>
+		{/not_sesion}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{include=relleno}
+		{copy}
+	</body>
+</html>

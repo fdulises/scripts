@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Prueba</title>
+	<style>
+.formvalid {
+    margin: 0 auto;
+    width: 487px;
+}
+.formvalid label {
+    color: #808080;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+.formvalid input, .formvalid textarea, .formvalid select .formvalid [data-valid] {
+    border: 1px solid #ccc;
+    height: 20px;
+    margin: 0 15px 15px;
+    padding: 5px 5px 5px 15px;
+    width: 73%;
+}
+.formvalid [data-valid="campoerror"]{
+	border-color: #dd2929;
+}
+.formvalid [data-valid=campocorrect]{
+	border-color: #009fe6;
+}
+.formvalid button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.5);
+    float: right;
+    margin: 0;
+    padding: 5px 10px;
+}
+.formvalid button:hover {
+    background-color: #ddd;
+}
+.formvalid select {
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    padding: 6px 10px;
+    width: 79%;
+}
+.formvalid textarea {
+    height: 80px;
+}
+	</style>
+	<script src="validar.js"></script>
+</head>
+<body>
+	<h1></h1>
+	<form name="fprueba" class="formvalid">
+		<h1>Validación de formularios</h1>
+		<div>
+			<label for="pc1">Cadena 1</label>
+			<input type="text" value="" name="pc1" id="pc1" placeholder="10 caracteres" />
+			<button type="button" onclick="validar1()">Validar</button>
+		</div>
+		<div>
+			<label for="purl1">Cadena URL</label>
+			<input type="text" value="" name="purl1" id="purl1" placeholder="URL Valida" />
+			<button type="button" onclick="validar2()">Validar</button>
+		</div>
+		<div>
+			<label for="pt1">Cadena Tags</label>
+			<input type="text" value="" name="pt1" id="pt1" placeholder="3 Tags, ejemplo: 'tag1, tag2, tag3'" />
+			<button type="button" onclick="validar3()">Validar</button>
+		</div>
+		<div>
+			<label for="ps1">Menu</label>
+			<select name="ps1" id="ps1">
+				<option>Seleccione uno</option>
+				<option value="primero">Primero</option>
+				<option value="segundo">Segundo</option>
+				<option value="tercero">Tercero</option>
+			</select>
+			<button type="button" onclick="validar4()">Validar</button>
+		</div>
+		<div>
+			<label for="pc2">Cadena 2</label>
+			<textarea name="pc2" id="pc2" placeholder="50 Caracteres"></textarea>
+			<button type="button" onclick="validar5()">Validar</button>
+		</div>
+		<div>
+			<label for="pc3">Cadena 3</label>
+			<textarea name="pc3" id="pc3" placeholder="10 palabras"></textarea>
+			<button type="button" onclick="validar6()">Validar</button>
+		</div>
+	</form>
+	<script>
+		var formp = document.fprueba;
+		function validar1(){
+			var elemento = formp.pc1;
+			var res = validarCampos({tipo: "largo", elemento: elemento, largo: 10});
+		}
+		function validar2(){
+			var elemento = formp.purl1;
+			var res = validarCampos({tipo: "url", elemento: elemento});
+		}
+		function validar3(){
+			var elemento = formp.pt1;
+			var res = validarCampos({tipo: "tags", elemento: elemento, largo: 3});
+		}
+		function validar4(){
+			var elemento = formp.ps1;
+			var res = validarCampos({tipo: "select", elemento: elemento});
+		}
+		function validar5(){
+			var elemento = formp.pc2;
+			var res = validarCampos({tipo: "largo", elemento: elemento, largo: 50});
+		}
+		function validar6(){
+			var elemento = formp.pc3;
+			var res = validarCampos({tipo: "palabras", elemento: elemento, largo: 10});
+		}
+	</script>
+</body>
+</html>
