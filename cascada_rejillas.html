@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<style>
+		*, *::after, *::before{
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+		html, body{
+			width: 100%;
+			height: 100%;
+		}
+		.container, .container::after, .container::before{
+			display: table;
+			clear: both;
+			content: "";
+		}
+		.container{
+			display: block;
+			width: 100%;
+			max-width: 1200px;
+			overflow: hidden;
+			padding: 0 15px;
+			margin: 0 auto;
+		}
+		[class*="bloque"]{
+			width: 320px;
+			min-width: 320px;
+			min-height: 50px;
+			background-color: #f0f0f0;
+			float: left;
+			outline: 1px solid #ff6666;
+		}
+		.bloque-t1{min-height: 300px;}
+		.bloque-t2{min-height: 500px;}
+		.bloque-t3{min-height: 450px;}
+	</style>
+</head>
+<body>
+	<div id="masonry" class="container">
+		<div class="bloque-t1"></div>
+		<div class="bloque-t2"></div>
+		<div class="bloque-t3"></div>
+		<div class="bloque-t1"></div>
+		<div class="bloque-t1"></div>
+		<div class="bloque-t1"></div>
+		<div class="bloque-t2"></div>
+		<div class="bloque-t2"></div>
+		<div class="bloque-t2"></div>
+		<div class="bloque-t3"></div>
+		<div class="bloque-t3"></div>
+		<div class="bloque-t3"></div>
+	</div>
+	<script>
+		function masonry(conf){
+			var pared = document.querySelector(conf.contenedor);
+			var paredWidth = pared.offsetWidth;
+			
+			var fragmentos = pared.querySelectorAll("div");
+			var totalE = fragmentos.length;
+			
+			var columnasT = Math.ceil(paredWidth/conf.columnax);
+			var columnas = [];
+			
+			for(i=0; i<columnasT; i++){
+				columnas[i] = 0;
+			}
+			
+			function determinarMenor(){
+				var alto = columnas[0];
+				var lugar = 0;
+				for(j=(columnasT-1); j>=0; j--){
+					if( columnas[j]<=alto ){
+						alto = columnas[j];
+						lugar = j;
+					}
+				}
+				return {alto: alto, lugar: lugar};
+			}
+			
+			for(i=0; i<totalE; i++){
+				var height = fragmentos[i].offsetHeight;
+				var menor = determinarMenor();
+				
+				fragmentos[i].style.position = "absolute";
+				fragmentos[i].style.top = (menor.alto)+"px";
+				fragmentos[i].style.left = (menor.lugar*conf.columnax)+"px";
+				
+				columnas[menor.lugar] += height;
+				console.log(columnas);
+			}
+		}
+		masonry({
+			contenedor: "#masonry",
+			columnax: 320,
+		});
+	</script>
+</body>
+</html>
