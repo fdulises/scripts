@@ -1,0 +1,3 @@
+/usr/bin/php -q /home/nproyect/public_html/index.php url=autosc
+
+/usr/bin/php -q /home/cjakvfdk/public_html/nekochat.net/index.php url=autosc

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="300" height="300"></canvas>
+	<script type="text/javascript">
+var canvas = null,
+    ctx = null,
+    x = 0,
+    y = 50;
+	var fcn = 0;
+	function fpscount(){
+		window.setTimeout(function(){console.log(fcn); fcn = 0;fpscount();}, 1000);
+	}
+	fpscount()
+
+window.requestAnimationFrame = (function () {
+    return function (callback) {
+            window.setTimeout(callback, 62.5/1);
+        };
+}());
+
+function paint(ctx) {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#0f0';
+    ctx.fillRect(x, y, 10, 10);
+}
+
+function act() {
+    x += canvas.width/(16*1);
+    if (x > canvas.width) x = 0;
+	++fcn;
+}
+
+function run() {
+    window.requestAnimationFrame(run);
+    act();
+    paint(ctx);
+}
+
+function init() {
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+
+    run();
+}
+
+window.addEventListener('load', init, false);
+	</script>
+</body>
+</html>
